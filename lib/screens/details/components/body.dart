@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/models/Cart.dart';
 import 'package:shop_app/models/Product.dart';
 import 'package:shop_app/size_config.dart';
 
@@ -10,8 +11,9 @@ import 'product_images.dart';
 
 class Body extends StatelessWidget {
   final Product product;
+  final Function(Cart) addToCartCallback; // Callback function
 
-  const Body({Key? key, required this.product}) : super(key: key);
+  const Body({Key? key, required this.product, required this.addToCartCallback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,14 @@ class Body extends StatelessWidget {
                         ),
                         child: DefaultButton(
                           text: "Add To Cart",
-                          press: () {},
+                          press: () {
+                            addToCartCallback(
+                              Cart(
+                                product: product,
+                                numOfItem: 1
+                                )
+                              ); // Call the callback function with the product
+                          },
                         ),
                       ),
                     ),

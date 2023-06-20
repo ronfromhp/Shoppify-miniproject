@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/auth_controller.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/screens/home/home_screen.dart';
 import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 import 'package:shop_app/size_config.dart';
 
@@ -70,7 +72,12 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Continue",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        if(AuthController.instance.currentUser != null){
+                          Navigator.pushNamed(context, HomeScreen.routeName);
+                        }
+                        else{
+                          Navigator.pushNamed(context, SignInScreen.routeName);
+                        }
                       },
                     ),
                     Spacer(),

@@ -14,7 +14,7 @@ class AuthController extends GetxController{
   void onReady(){
      super.onReady();
      _user = Rx<User?>(auth.currentUser);
-     _user?.bindStream(auth.userChanges());
+     _user.bindStream(auth.userChanges());
      // ever(_user, _initialScreen);
    }
    _initialScreen(User? user){
@@ -27,33 +27,36 @@ class AuthController extends GetxController{
      }
    }
 
-   Future<void> register(String email, password) async{
-     try {
-       await auth.createUserWithEmailAndPassword(email: email, password: password);
-       Get.to(SignInScreen());
-     }
-     catch(e){
-       rethrow;
-     }
-   }
+  // Getter method to access the current user value
+  User? get currentUser => _user.value;
 
-   Future<void> login(String email, password) async{
-     try {
-       await auth.signInWithEmailAndPassword(email: email, password: password);
-       Get.to(HomeScreen());
-     }
-     catch(e){
-       if(e is FirebaseAuthException) {
-         var ex = handleFirebaseAuthException(e);
-         throw(ex);
-       }
-     }
-   }
+  Future<void> register(String email, password) async{
+    try {
+      await auth.createUserWithEmailAndPassword(email: email, password: password);
+      Get.to(SignInScreen());
+    }
+    catch(e){
+      rethrow;
+    }
+  }
 
-   void logout() async{
-     await auth.signOut();
-     Get.offAll(SignInScreen());
-   }
+  Future<void> login(String email, password) async{
+    try {
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.off(LoginSuccessScreen());
+    }
+    catch(e){
+      if(e is FirebaseAuthException) {
+        var ex = handleFirebaseAuthException(e);
+        throw(ex);
+      }
+    }
+  }
+
+  void logout() async{
+    await auth.signOut();
+    Get.offAll(SignInScreen());
+  }
 }
 
 String handleFirebaseAuthException(FirebaseAuthException exception) {

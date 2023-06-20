@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 
+import '../../models/Cart.dart';
 import '../../models/Product.dart';
 import 'components/body.dart';
 import 'components/custom_app_bar.dart';
 
 class DetailsScreen extends StatelessWidget {
   static String routeName = "/details";
+
+  void addToCart(Cart cartItem){
+   final existingCartItemIndex = demoCarts.indexWhere((item) => item.product.id == cartItem.product.id);
+    if (existingCartItemIndex != -1) {
+      final existingCartItem = demoCarts[existingCartItemIndex];
+      demoCarts[existingCartItemIndex] = Cart(
+        product: existingCartItem.product,
+        numOfItem: existingCartItem.numOfItem + cartItem.numOfItem,
+      );
+    } else {
+      demoCarts.add(cartItem);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,7 @@ class DetailsScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(AppBar().preferredSize.height),
         child: CustomAppBar(rating: agrs.product.rating),
       ),
-      body: Body(product: agrs.product),
+      body: Body(product: agrs.product, addToCartCallback: addToCart,),
     );
   }
 }
