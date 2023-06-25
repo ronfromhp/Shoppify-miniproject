@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                             addToCartCallback(
                               Cart(
                                 product: product,
-                                numOfItem: 1
+                                count: 1
                                 )
                               ); // Call the callback function with the product
                           },

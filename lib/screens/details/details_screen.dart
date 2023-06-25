@@ -14,7 +14,7 @@ class DetailsScreen extends StatelessWidget {
       final existingCartItem = demoCarts[existingCartItemIndex];
       demoCarts[existingCartItemIndex] = Cart(
         product: existingCartItem.product,
-        numOfItem: existingCartItem.numOfItem + cartItem.numOfItem,
+        count: existingCartItem.count + cartItem.count,
       );
     } else {
       demoCarts.add(cartItem);

@@ -29,7 +29,7 @@ class _ColorDotsState extends State<ColorDots> {
           ...List.generate(
             widget.product.colors.length,
                 (index) => ColorDot(
-              color: widget.product.colors[index],
+              color: Color(widget.product.colors[index]),
               isSelected: index == selectedColor,
               onTap: () {
                 setState(() {
