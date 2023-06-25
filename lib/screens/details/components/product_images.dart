@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/Product.dart';
 
@@ -28,7 +29,7 @@ class _ProductImagesState extends State<ProductImages> {
             aspectRatio: 1,
             child: Hero(
               tag: widget.product.id.toString(),
-              child: Image.asset(widget.product.images[selectedImage]),
+              child: CachedNetworkImage(imageUrl: widget.product.images[selectedImage]),
             ),
           ),
         ),
@@ -63,7 +64,7 @@ class _ProductImagesState extends State<ProductImages> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image.asset(widget.product.images[index]),
+        child: CachedNetworkImage(imageUrl: widget.product.images[index]),
       ),
     );
   }

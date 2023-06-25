@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/models/Product.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
@@ -42,7 +43,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Hero(
                     tag: product.id.toString(),
-                    child: Image.asset(product.images[0]),
+                    child: CachedNetworkImage(imageUrl: product.images[0], fit: BoxFit.fitWidth),
                   ),
                 ),
               ),

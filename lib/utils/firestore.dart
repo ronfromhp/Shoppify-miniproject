@@ -19,6 +19,7 @@ class FirestoreUtil {
       if (ids != null && ids.isNotEmpty) {
         productDoc = await prodyctRef.where('id', whereIn: ids).get();
       } else {
+        log("actually works");
         productDoc = await prodyctRef.get();
       }
       return productDoc.docs.map((e) => e.data()).toList();
