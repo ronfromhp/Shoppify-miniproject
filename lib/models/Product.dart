@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/material.dart';
+part 'Product.g.dart';
 
 @JsonSerializable()
 class Product {
@@ -11,7 +12,6 @@ class Product {
   final double rating, price;
   final bool isFavourite, isPopular;
 
-  @JsonKey(defaultValue: "")
   String category;
 
   Product({
@@ -27,7 +27,11 @@ class Product {
     required this.price,
     required this.description,
   });
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
   
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
+
 }
 
 // Our demo Products

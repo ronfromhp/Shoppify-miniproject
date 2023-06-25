@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'Product.dart';
+part 'Cart.g.dart';
 
 @JsonSerializable()
 class Cart {
@@ -7,6 +8,8 @@ class Cart {
   final int count;
 
   Cart({required this.product, required this.count});
+
+  factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
 }
 
 // Demo data for our cart
