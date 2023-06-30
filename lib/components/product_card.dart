@@ -13,11 +13,12 @@ class ProductCard extends StatelessWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     required this.product,
+    required this.heroTag,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final Product product;
-
+  final String heroTag;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +29,7 @@ class ProductCard extends StatelessWidget {
           onTap: () => Navigator.pushNamed(
             context,
             DetailsScreen.routeName,
-            arguments: ProductDetailsArguments(product: product),
+            arguments: ProductDetailsArguments(product: product, heroTag: heroTag ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,8 +43,8 @@ class ProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Hero(
-                    tag: product.id.toString(),
-                    child: CachedNetworkImage(imageUrl: product.images[0], fit: BoxFit.fitWidth),
+                    tag: product.id + heroTag,
+                    child: Image(image: CachedNetworkImageProvider( product.images[0]), fit: BoxFit.fitWidth),
                   ),
                 ),
               ),

@@ -11,15 +11,16 @@ import 'product_images.dart';
 
 class Body extends StatelessWidget {
   final Product product;
+  final String heroTag;
   final Function(Cart) addToCartCallback; // Callback function
 
-  const Body({Key? key, required this.product, required this.addToCartCallback}) : super(key: key);
+  const Body({Key? key, required this.product,required this.heroTag, required this.addToCartCallback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        ProductImages(product: product),
+        ProductImages(product: product, heroTag:  heroTag,),
         TopRoundedContainer(
           color: Colors.white,
           child: Column(

@@ -9,9 +9,11 @@ class ProductImages extends StatefulWidget {
   const ProductImages({
     Key? key,
     required this.product,
+    required this.heroTag
   }) : super(key: key);
 
   final Product product;
+  final String heroTag;
 
   @override
   _ProductImagesState createState() => _ProductImagesState();
@@ -28,8 +30,8 @@ class _ProductImagesState extends State<ProductImages> {
           child: AspectRatio(
             aspectRatio: 1,
             child: Hero(
-              tag: widget.product.id.toString(),
-              child: CachedNetworkImage(imageUrl: widget.product.images[selectedImage]),
+              tag: widget.product.id + widget.heroTag,
+              child: Image(image: CachedNetworkImageProvider(widget.product.images[selectedImage]))
             ),
           ),
         ),

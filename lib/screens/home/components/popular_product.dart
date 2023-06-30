@@ -7,19 +7,24 @@ import 'package:shop_app/utils/firestore.dart';
 import '../../../size_config.dart';
 import 'section_title.dart';
 
-class PopularProducts extends StatefulWidget {
-  @override
-  State<PopularProducts> createState() => _PopularProductsState();
-}
+// class PopularProducts extends StatefulWidget {
+//   @override
+//   State<PopularProducts> createState() => _PopularProductsState();
+// }
 
-class _PopularProductsState extends State<PopularProducts> {
+class PopularProducts extends StatelessWidget {
 
-  Future<List<Product>>? products;
-  @override
-  void initState(){
-    super.initState();
-    products = FirestoreUtil.getProducts([]);
-  }
+  final Future<List<Product>>? products;
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   products = FirestoreUtil.getProducts([]);
+  // }
+
+  const PopularProducts({
+    Key? key,
+    required this.products
+  }) :super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +48,11 @@ class _PopularProductsState extends State<PopularProducts> {
                       ...List.generate(
                         snapshot.data!.length,
                         (index) {
-                          if (snapshot.data![index].isPopular)
-                            return ProductCard(product: snapshot.data![index]);
-
+                          if (snapshot.data![index].isPopular) {
+                            return ProductCard(
+                              product: snapshot.data![index],
+                              heroTag: "popProds",);
+                          }
                           return SizedBox.shrink(); // here by default width and height is 0
                         },
                       ),

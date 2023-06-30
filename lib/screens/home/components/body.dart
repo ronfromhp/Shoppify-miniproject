@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/screens/home/components/all_product.dart';
+import 'package:shop_app/utils/firestore.dart';
 
 import '../../../size_config.dart';
 import 'categories.dart';
@@ -7,7 +10,20 @@ import 'home_header.dart';
 import 'popular_product.dart';
 import 'special_offers.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+
+  Future<List<Product>>? products;
+  @override
+  void initState() {
+    super.initState();
+    products = FirestoreUtil.getProducts([]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,8 +37,19 @@ class Body extends StatelessWidget {
             Categories(),
             SpecialOffers(),
             SizedBox(height: getProportionateScreenWidth(30)),
-            PopularProducts(),
+            PopularProducts(
+              products: products,
+            ),
             SizedBox(height: getProportionateScreenWidth(30)),
+            SizedBox(
+              height: SizeConfig.screenHeight * 0.85,
+              child: ProductsSection(
+                sectionTitle: "Explore All Products",
+                products: products,
+                emptyListMessage: "Looks like all Stores are closed",
+              ),
+            ),
+            
           ],
         ),
       ),

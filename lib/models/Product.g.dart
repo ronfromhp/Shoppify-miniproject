@@ -7,7 +7,7 @@ part of 'Product.dart';
 // **************************************************************************
 
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
-      id: json['id'] as int,
+      id: json['id'] as String,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       colors:

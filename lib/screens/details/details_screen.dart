@@ -31,13 +31,13 @@ class DetailsScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(AppBar().preferredSize.height),
         child: CustomAppBar(rating: agrs.product.rating),
       ),
-      body: Body(product: agrs.product, addToCartCallback: addToCart,),
+      body: Body(product: agrs.product, heroTag: agrs.heroTag, addToCartCallback: addToCart,),
     );
   }
 }
 
 class ProductDetailsArguments {
   final Product product;
-
-  ProductDetailsArguments({required this.product});
+  final String heroTag;
+  ProductDetailsArguments({required this.product, required this.heroTag});
 }
