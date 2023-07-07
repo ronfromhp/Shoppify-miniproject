@@ -44,14 +44,14 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Hero(
                     tag: product.id + heroTag,
-                    child: Image(image: CachedNetworkImageProvider( product.images[0]), fit: BoxFit.fitWidth),
+                    child: Image(image: CachedNetworkImageProvider( product.images[0]), fit: BoxFit.contain),
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 product.title,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 maxLines: 2,
               ),
               Row(
@@ -81,8 +81,8 @@ class ProductCard extends StatelessWidget {
                       child: SvgPicture.asset(
                         "assets/icons/Heart Icon_2.svg",
                         color: product.isFavourite
-                            ? Color(0xFFDE4444)
-                            : Color(0xFFD8DCE8),
+                            ? const Color(0xFFDE4444)
+                            : const Color(0xFFD8DCE8),
                       ),
                     ),
                   ),

@@ -73,11 +73,5 @@ class FirestoreUtil {
     return carts;
   }
 
-  static double getCartTotal(List<Cart> carts) {
-    double total = 0;
-    for (Cart cart in carts) {
-      total += cart.product.price * cart.count;
-    }
-    return total;
-  }
+  
 }

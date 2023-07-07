@@ -11,6 +11,8 @@ import 'popular_product.dart';
 import 'special_offers.dart';
 
 class Body extends StatefulWidget {
+  const Body({super.key});
+
   @override
   State<Body> createState() => _BodyState();
 }
@@ -31,11 +33,11 @@ class _BodyState extends State<Body> {
         child: Column(
           children: [
             SizedBox(height: getProportionateScreenHeight(20)),
-            HomeHeader(),
+            const HomeHeader(),
             SizedBox(height: getProportionateScreenWidth(10)),
-            DiscountBanner(),
-            Categories(),
-            SpecialOffers(),
+            const DiscountBanner(),
+            const Categories(),
+            const SpecialOffers(),
             SizedBox(height: getProportionateScreenWidth(30)),
             PopularProducts(
               products: products,

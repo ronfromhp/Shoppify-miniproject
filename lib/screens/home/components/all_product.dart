@@ -26,7 +26,7 @@ class ProductsSection extends StatelessWidget {
     return Container(
       
       decoration: BoxDecoration(
-        color: Color(0xFFF5F6F9),
+        color: const Color(0xFFF5F6F9),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
@@ -56,7 +56,7 @@ class ProductsSection extends StatelessWidget {
       future: products,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.length == 0) {
+          if (snapshot.data!.isEmpty) {
             return Center(
               child: NothingToShowContainer(
                 secondaryMessage: emptyListMessage,
@@ -65,14 +65,14 @@ class ProductsSection extends StatelessWidget {
           }
           return buildProductGrid(snapshot.data!);
         } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Loader(),
           );
         } else if (snapshot.hasError) {
           final error = snapshot.error;
           log(error.toString());
         }
-        return Center(
+        return const Center(
           child: NothingToShowContainer(
             iconPath: "assets/icons/network_error.svg",
             primaryMessage: "Something went wrong",
@@ -89,8 +89,8 @@ class ProductsSection extends StatelessWidget {
         right: getProportionateScreenWidth(20)
       ),
       shrinkWrap: true,
-      physics: BouncingScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      physics: const BouncingScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 0.7,
         crossAxisSpacing: 0,

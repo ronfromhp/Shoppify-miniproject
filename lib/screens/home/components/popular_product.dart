@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/loader.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/models/Product.dart';
-import 'package:shop_app/utils/firestore.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -53,7 +52,7 @@ class PopularProducts extends StatelessWidget {
                               product: snapshot.data![index],
                               heroTag: "popProds",);
                           }
-                          return SizedBox.shrink(); // here by default width and height is 0
+                          return const SizedBox.shrink(); // here by default width and height is 0
                         },
                       ),
                       SizedBox(width: getProportionateScreenWidth(20)),

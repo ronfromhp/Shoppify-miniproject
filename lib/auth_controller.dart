@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shop_app/screens/home/home_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
-import 'package:shop_app/screens/sign_up/sign_up_screen.dart';
 
 class AuthController extends GetxController{
    static AuthController instance = Get.find();
@@ -20,10 +18,10 @@ class AuthController extends GetxController{
    _initialScreen(User? user){
      if(user == null){
        print("login page");
-       Get.offAll(()=> SignInScreen());
+       Get.offAll(()=> const SignInScreen());
      }
      else{
-       Get.off(()=> SignInScreen());
+       Get.off(()=> const SignInScreen());
      }
    }
 
@@ -33,7 +31,7 @@ class AuthController extends GetxController{
   Future<void> register(String email, password) async{
     try {
       await auth.createUserWithEmailAndPassword(email: email, password: password);
-      Get.to(SignInScreen());
+      Get.to(const SignInScreen());
     }
     catch(e){
       rethrow;
@@ -43,7 +41,7 @@ class AuthController extends GetxController{
   Future<void> login(String email, password) async{
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.off(LoginSuccessScreen());
+      Get.off(const LoginSuccessScreen());
     }
     catch(e){
       if(e is FirebaseAuthException) {
@@ -55,7 +53,7 @@ class AuthController extends GetxController{
 
   void logout() async{
     await auth.signOut();
-    Get.offAll(SignInScreen());
+    Get.offAll(const SignInScreen());
   }
 }
 

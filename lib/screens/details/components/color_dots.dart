@@ -38,17 +38,17 @@ class _ColorDotsState extends State<ColorDots> {
               },
             ),
           ),
-          Spacer(),
-          RoundedIconBtn(
-            icon: Icons.remove,
-            press: () {},
-          ),
-          SizedBox(width: getProportionateScreenWidth(20)),
-          RoundedIconBtn(
-            icon: Icons.add,
-            showShadow: true,
-            press: () {},
-          ),
+          const Spacer(),
+          // RoundedIconBtn(
+          //   icon: Icons.remove,
+          //   press: () {},
+          // ),
+          SizedBox(width: getProportionateScreenWidth(40)),
+          // RoundedIconBtn(
+          //   icon: Icons.add,
+          //   showShadow: true,
+          //   press: () {},
+          // ),
         ],
       ),
     );
@@ -73,7 +73,7 @@ class ColorDot extends StatelessWidget {
     return GestureDetector(
       onTap: onTap, // Call the callback function when the dot is tapped
       child: Container(
-        margin: EdgeInsets.only(right: 2),
+        margin: const EdgeInsets.only(right: 2),
         padding: EdgeInsets.all(getProportionateScreenWidth(8)),
         height: getProportionateScreenWidth(40),
         width: getProportionateScreenWidth(40),

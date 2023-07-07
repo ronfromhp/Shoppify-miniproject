@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shop_app/models/Cart.dart';
 
 import 'components/body.dart';
@@ -6,12 +7,16 @@ import 'components/check_out_card.dart';
 
 class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
+
+  final itemCount = CartController.instance.cartItems.length;
+
+  CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Body(),
-      bottomNavigationBar: CheckoutCard(),
+      body: const Body(),
+      bottomNavigationBar: const CheckoutCard(),
     );
   }
 
@@ -19,14 +24,17 @@ class CartScreen extends StatelessWidget {
     return AppBar(
       title: Column(
         children: [
-          Text(
+          const Text(
             "Your Cart",
             style: TextStyle(color: Colors.black),
           ),
-          Text(
-            "${demoCarts.length} items",
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          Obx(() {
+            final itemCount = CartController.instance.cartItems.length;
+            return Text(
+              "$itemCount items",
+              style: Theme.of(context).textTheme.bodySmall,
+            );
+          }),
         ],
       ),
     );

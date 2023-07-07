@@ -5,15 +5,20 @@ import 'package:shop_app/models/Product.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class ProductDescription extends StatelessWidget {
+class ProductDescription extends StatefulWidget {
   const ProductDescription({
     Key? key,
     required this.product,
-    this.pressOnSeeMore,
   }) : super(key: key);
 
   final Product product;
-  final GestureTapCallback? pressOnSeeMore;
+
+  @override
+  _ProductDescriptionState createState() => _ProductDescriptionState();
+}
+
+class _ProductDescriptionState extends State<ProductDescription> {
+  bool showFullDescription = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +26,9 @@ class ProductDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: Text(
-            product.title,
+            widget.product.title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
@@ -34,17 +38,15 @@ class ProductDescription extends StatelessWidget {
             padding: EdgeInsets.all(getProportionateScreenWidth(15)),
             width: getProportionateScreenWidth(64),
             decoration: BoxDecoration(
-              color:
-                  product.isFavourite ? Color(0xFFFFE6E6) : Color(0xFFF5F6F9),
-              borderRadius: BorderRadius.only(
+              color: widget.product.isFavourite ? const Color(0xFFFFE6E6) : const Color(0xFFF5F6F9),
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
               ),
             ),
             child: SvgPicture.asset(
               "assets/icons/Heart Icon_2.svg",
-              color:
-                  product.isFavourite ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
+              color: widget.product.isFavourite ? const Color(0xFFFF4848) : const Color(0xFFDBDEE4),
               height: getProportionateScreenWidth(16),
             ),
           ),
@@ -54,9 +56,13 @@ class ProductDescription extends StatelessWidget {
             left: getProportionateScreenWidth(20),
             right: getProportionateScreenWidth(64),
           ),
-          child: Text(
-            product.description,
-            maxLines: 3,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: showFullDescription ? null : getProportionateScreenHeight(60),
+            child: Text(
+              showFullDescription ? widget.product.description : '${widget.product.description.substring(0, 50)}...',
+              maxLines: showFullDescription ? null : 3,
+            ),
           ),
         ),
         Padding(
@@ -65,13 +71,19 @@ class ProductDescription extends StatelessWidget {
             vertical: 10,
           ),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                showFullDescription = !showFullDescription;
+              });
+            },
             child: Row(
               children: [
                 Text(
-                  "See More Detail",
+                  showFullDescription ? 'See Less Details' : 'See More Details',
                   style: TextStyle(
-                      fontWeight: FontWeight.w600, color: kPrimaryColor),
+                    fontWeight: FontWeight.w600,
+                    color: kPrimaryColor,
+                  ),
                 ),
                 SizedBox(width: 5),
                 Icon(
